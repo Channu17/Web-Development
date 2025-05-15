@@ -39,3 +39,30 @@ console.log(arr.reverse());
 arr.forEach((value, index, arr) => {
     console.log(value, index, arr);
 })
+
+for (const value in arr) {
+    console.log(value);
+}
+
+
+let arr2 = [1, 2, 2, 4, 5]
+let newarr = []
+
+for (let i = 0; i < arr2.length; i++) {
+    newarr[i] = arr2[i] ** 2;
+    console.log(newarr[i]);
+}
+
+let arr3 = arr2.map((e) => {    
+    return e**2
+})
+
+
+console.log(arr3);
+
+
+ let arr4 = arr2.filter((e)=>{
+    return e>2
+ })
+
+console.log(arr4);
