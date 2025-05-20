@@ -27,3 +27,22 @@ export const getuserSubscriptions = async(req, res, next)=>{
     }
 }
 
+export const getAllSubscriptions = async(req, res, next) => {
+    try {
+        const subscriptions = await Subscription.find();
+        res.status(200).json({success:true, data:subscriptions})
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getSubscriptionsById = async (req, res, next) =>{
+    try {
+        let id = req.params.id;
+        const subscription = await Subscription.findOne({_id: id});
+        res.status(200).json({success:true, data:subscription});
+    } catch (error) {
+        next(error);
+    }
+}
