@@ -17,7 +17,7 @@ const subscriptionSchema = new mongoose.Schema({
         type:String,
         enum: ['USD','EUR', "RUP" ]
     },
-    Frequency:{
+    frequency:{
         type: String,
         enum: ['daily', 'weekly', 'monthly', 'yearly'],
         required: [true, "Frequency is required"],
@@ -27,7 +27,7 @@ const subscriptionSchema = new mongoose.Schema({
         enum: ['entertainment', 'food', 'utilities', 'transportation', 'health', 'other'],
         required: [true, "Category is required"],
     },
-    payamentMethod:{
+    paymentMethod:{
         type:String,
         required: [true, "payement method is required"],
         trim: true,
@@ -47,7 +47,7 @@ const subscriptionSchema = new mongoose.Schema({
     },
     renewalDate:{
         type: Date,
-        required: [true, "End date is required"],
+        required: [false, "End date is required"],
         validate:{
             validator: function (value) {
                 return value > this.startDate;
@@ -82,6 +82,6 @@ subscriptionSchema.pre("save", function(next){
     next();
 });
 
-const subscription = mongoose.model("Subscription", subscriptionSchema);
+const Subscription = mongoose.model("Subscription", subscriptionSchema);
 
-export default subscription;
+export default Subscription;
