@@ -1,5 +1,5 @@
 // Get all contacts
-import asyncHandler from "express-async-handler"
+import asyncHandler from "express-async-handler";
 import Contact from "../models/contact.model.js";
 
 
