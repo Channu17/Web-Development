@@ -4,7 +4,7 @@ import Contact from "../models/contact.model.js";
 
 
 export const getContact =asyncHandler(async (req, res)=>{
-    const contacts = await Contact.find();
+    const contacts = await Contact.find({user_id: req.user.id});
     res.status(200).json(contacts);
 });
 
@@ -21,6 +21,7 @@ export const createContact =asyncHandler(async (req, res)=>{
         name,
         email, 
         phone,
+        user_id:req.user.id,
     });
     res.status(200).json({message: "Create contact", data: contacts});
 });
@@ -36,6 +37,10 @@ export const deleteContact =asyncHandler(async (req, res) =>{
         res.status(404);
         throw new Error("Contact not found");
     }
+    if(contact.user_id.toString() != req.user.id){
+        res.status(403);
+        throw new Error("User dont have permission to Delete this contact")
+    }
     await contact.deleteOne();
     res.status(200).json({data:contact});
 });
@@ -45,6 +50,10 @@ export const updateContact =asyncHandler(async(req, res) =>{
     if(!contact){
         res.status(404);
         throw new Error("Contact not found");
+    }
+    if(contact.user_id.toString() != req.user.id){
+        res.status(403);
+        throw new Error("User dont have permission to upadte  this contact")
     }
     const updatedContact = await Contact.findByIdAndUpdate(
         req.params.id,

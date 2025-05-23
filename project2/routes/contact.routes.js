@@ -1,17 +1,17 @@
 import express from "express";
 import { createContact, deleteContact, getContact, getContactById, updateContact } from "../controllers/contact.controller.js";
-
+import validateToken from "../middlewares/auth.middleware.js";
 const contactRouter = express.Router();
 
-contactRouter.get("/", getContact);
+contactRouter.get("/", validateToken, getContact);
 
-contactRouter.get("/:id", getContactById); 
+contactRouter.get("/:id",validateToken, getContactById); 
 
-contactRouter.post("/", createContact);
+contactRouter.post("/",validateToken, createContact);
 
-contactRouter.put("/:id", updateContact);
+contactRouter.put("/:id", validateToken, updateContact);
 
-contactRouter.delete("/:id", deleteContact);
+contactRouter.delete("/:id",validateToken, deleteContact);
 
 
 export default contactRouter;

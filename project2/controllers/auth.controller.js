@@ -56,6 +56,5 @@ export const loginUser  = asyncHandler(async (req, res)=>{
 });
 
 export const currentUser = asyncHandler(async (req, res)=>{
-    
-    res.json({message:"info of the current user"});
+    res.json(req.user);
 });
