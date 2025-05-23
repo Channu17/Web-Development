@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-
+//schema for the user models for the signup and signin
 const userShcema = mongoose.Schema({
     username:{
         type : String,
